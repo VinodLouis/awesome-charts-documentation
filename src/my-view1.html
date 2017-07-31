@@ -10,6 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="shared-styles.html">
+<link rel="import" href="../bower_components/awesome-charts/awesome-pie-chart.html">
 
 <dom-module id="my-view1">
   <template>
@@ -26,12 +27,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <h1>View One</h1>
       <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
       <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
+
+      <awesome-pie-chart chart-config="{{pieConfig}}" data="{{pieData}}" pie-click="{{clickPie}}" span-labels="{{labelCall}}"></awesome-pie-chart>
     </div>
+
   </template>
 
   <script>
     class MyView1 extends Polymer.Element {
       static get is() { return 'my-view1'; }
+      static get properties() {
+        return{
+          pieConfig:{
+            type:Object,
+            value:{
+               prop:"count",
+               labelsInside:false,
+               label:"id"
+               //disableHoverAnimation:true
+            }
+          },
+          pieData:{
+            type:Array,
+            value:[{id:"Credit",count:4586},{id:"Debit",count:5896},{id:"Credit1",count:4589},{id:"Debit1",count:3006}]
+          } 
+        }
+      }
+      clickPie(a,b,c){
+        console.log(a,b,c);
+      }
+
+      labelCall(data,d,el){
+              return data.id + ': <tspan> $ ' + data.count.toLocaleString('en') + '</tspan>'
+            }
     }
 
     window.customElements.define(MyView1.is, MyView1);
