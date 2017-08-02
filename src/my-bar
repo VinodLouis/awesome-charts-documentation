@@ -1,0 +1,260 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-bar">
+    <template>
+        <style include="iron-flex"></style>
+        <style include="iron-flex-factors"></style>
+        <style include="iron-flex-alignment"></style>
+        <style include="shared-styles">
+            :host {
+            display: block;
+
+            padding: 10px;
+            }
+
+
+
+
+        </style>
+
+        <div class="card">
+            <div class="flex layout horizontal">
+                <div class="flex-8">
+                    <h3>awesome-bar-chart</h3>
+                </div>
+                <div class="flex-4 layout horizontal end-justified">
+                    <span id="docs" on-click="sectionChanged" class$="selection-wrapper docs-[[isDocsSelected]]"><iron-icon icon="assignment"></iron-icon> Docs</span>&nbsp;&nbsp;
+                    <span id="demo" on-click="sectionChanged" class$="selection-wrapper demo-[[isDemoSelected]]"><iron-icon icon="visibility"></iron-icon> Demo</span>
+                </div>
+            </div>
+
+            <template is="dom-if" if={{isDocsSelected}}>
+                <div class="card card-custom">
+                    <h4>Properties</h4>
+                    <div class="item-doc">
+                        <div class="flex layout horizontal">
+                            <div class="flex-4 layout title-head">data</div>
+                            <div class="flex-2 layout title-italic">Array</div>
+                            <div class="flex-3 layout">default: [ ]</div>
+                            <div class="flex-3 layout">mandatory: <b>yes</b></div>
+                        </div>
+                        <p>
+                            A user defined input array which will be used to draw chart. It expected as array of object where the properties of the object will be used as chart entities.
+                        </p>
+                    </div>
+
+                    <div class="item-doc">
+                        <div class="flex layout horizontal">
+                            <div class="flex-4 layout title-head">chart-config</div>
+                            <div class="flex-2 layout title-italic">Object</div>
+                            <div class="flex-3 layout">default: {default settings}</div>
+                            <div class="flex-3 layout">mandatory: <b>N/A</b></div>
+                        </div>
+                        <p>
+                            Object used to control behavior of chart, It has many options not all of them are mandatory but however one can use it to enhance the chart. If in any case the provided value does not match required type then default settings are used.
+                        </p>
+                        <div class="flex layout horizontal">
+                            <div class="flex-3 layout title">attribute</div>
+                            <div class="flex-6 layout title">description</div>
+                            <div class="flex-2 layout title horizontal center-justified">default</div>
+                            <div class="flex-1 layout title horizontal center-justified">mandatory</div>
+                        </div>
+                        <hr/>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">label <i>(String)</i></div>
+                            <div class="flex-6 layout">The label of the context under which chart will be drawn the x axis property</div>
+                            <div class="flex-2 layout horizontal center-justified">" "</div>
+                            <div class="flex-1 layout horizontal center-justified">yes</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">keys <i>(String/Array)</i></div>
+                            <div class="flex-6 layout">Keys for bar value can be a single string(Single bar chart) or array of keys(Multiple bar chart)</div>
+                            <div class="flex-2 layout horizontal center-justified">" "</div>
+                            <div class="flex-1 layout horizontal center-justified">yes</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">color <i>(Array)</i></div>
+                            <div class="flex-6 layout">Array of color to be used for paining bar chart, length should be equal or greater than keys</div>
+                            <div class="flex-2 layout horizontal center-justified">[ ]</div>
+                            <div class="flex-1 layout horizontal center-justified">no</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">margin <i>(Object)</i></div>
+                            <div class="flex-6 layout">Object of properties left,right,top,bottom : All strictly a number value, to set margins useful in case of handling long labels</div>
+                            <div class="flex-2 layout horizontal center-justified">{left:35, right:80, top: 30, bottom: 50}</div>
+                            <div class="flex-1 layout horizontal center-justified">no</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">legends <i>(String/Array)</i></div>
+                            <div class="flex-6 layout">It accepts values in similar fashion as keys legends are given preference over keys in labelling</div>
+                            <div class="flex-2 layout horizontal center-justified">" "</div>
+                            <div class="flex-1 layout horizontal center-justified">no</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">showTextOnBar <i>(Boolean)</i></div>
+                            <div class="flex-6 layout">This will show value on top of bar if set to true</div>
+                            <div class="flex-2 layout horizontal center-justified">false</div>
+                            <div class="flex-1 layout horizontal center-justified">no</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">valueFormat <i>(String)</i></div>
+                            <div class="flex-6 layout">The y axis format identifier must be an valid d3.js number oarse specifier(<a href="https://github.com/d3/d3-format" target="_blank">github.com/d3/d3-format</a> )</div>
+                            <div class="flex-2 layout horizontal center-justified">".2s"</div>
+                            <div class="flex-1 layout horizontal center-justified">no</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">sort <i>(Number [-1,0,1])</i></div>
+                            <div class="flex-6 layout">sort the single or multiple values in accumulated total 0=>NONE, 1=> ASC, -1=>DESC</div>
+                            <div class="flex-2 layout horizontal center-justified">0</div>
+                            <div class="flex-1 layout horizontal center-justified">no</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">gridLines <i>(Boolean)</i></div>
+                            <div class="flex-6 layout">draws background gridlines if set to true</div>
+                            <div class="flex-2 layout horizontal center-justified">true</div>
+                            <div class="flex-1 layout horizontal center-justified">no</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">paddingLabelsGroup <i>(Number)</i></div>
+                            <div class="flex-6 layout">The padding value between two groups labels</div>
+                            <div class="flex-2 layout horizontal center-justified">0.1</div>
+                            <div class="flex-1 layout horizontal center-justified">no</div>
+                        </div>
+                        <div class="flex layout horizontal">
+                            <div class="flex-3 layout title">paddingBar <i>(Number)</i></div>
+                            <div class="flex-6 layout">The padding value between two bar in same group</div>
+                            <div class="flex-2 layout horizontal center-justified">0.05</div>
+                            <div class="flex-1 layout horizontal center-justified">no</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-custom">
+                    <h4>Methods</h4>
+                    <div class="item-doc">
+                        <div class="flex layout horizontal">
+                            <div class="flex-3 layout title-head">bar-click</div>
+                            <div class="flex-3 layout title-italic">Function to be called when a bar is clicked</div>
+                            <div class="flex-6 layout">returns param as (<u>param1</u>:{The data in context},<u>param2</u>:{the bar svg object clicked})</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-custom">
+                    <h4>Events/Hooks</h4>
+                    <div class="item-doc">
+                        <div class="flex layout horizontal">
+                            <div class="flex-3 layout title-head">tooltip</div>
+                            <div class="flex-3 layout title-italic">Hook for showing custom tooltip as text</div>
+                            <div class="flex-6 layout">return type shall be string and passing param include (<u>param1</u>:{The data in context},<u>param2</u>:{The whole object data})</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-custom">
+                    <h4>Mixins supported</h4>
+                    <div class="item-doc">
+                        <div class="flex layout horizontal">
+                            <div class="flex-3 layout title">name</div>
+                            <div class="flex-6 layout title">description</div>
+                            <div class="flex-3 layout title horizontal center-justified">default</div>
+                        </div>
+                        <hr/>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title-italic">--grid-stroke-color</div>
+                            <div class="flex-6 layout">Set grid line color</div>
+                            <div class="flex-3 layout horizontal center-justified">#ddd</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title-italic">--grid-stroke-width</div>
+                            <div class="flex-6 layout">Set width of the grid lines</div>
+                            <div class="flex-3 layout horizontal center-justified">1px</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title-italic">--bar-hover-color</div>
+                            <div class="flex-6 layout">Bar border color on hover</div>
+                            <div class="flex-3 layout horizontal center-justified">#000000</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title-italic">--bar-hover-width</div>
+                            <div class="flex-6 layout">Bar border width color on hover</div>
+                            <div class="flex-3 layout horizontal center-justified">1px</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title-italic">--legend-text-font-family</div>
+                            <div class="flex-6 layout">legend font family</div>
+                            <div class="flex-3 layout horizontal center-justified">sans-serif</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title-italic">--legend-text-font-size</div>
+                            <div class="flex-6 layout">legend font size</div>
+                            <div class="flex-3 layout horizontal center-justified">11px</div>
+                        </div>
+                        <div class="flex layout horizontal">
+                            <div class="flex-3 layout title-italic">--axis-line-display</div>
+                            <div class="flex-6 layout">axis line display</div>
+                            <div class="flex-3 layout horizontal center-justified">none</div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <template is="dom-if" if={{isDemoSelected}}>
+                <iframe style="border: 1px solid #999;width: 100%; height: 500px"
+                        src="https://embed.plnkr.co/IRQsXPtiwrCyxXHTDwZV/?show=preview" frameborder="0"
+                        allowfullscreen="allowfullscreen">
+                    Loading plunk...
+                </iframe>
+            </template>
+        </div>
+    </template>
+
+    <script>
+    class MyBar extends Polymer.Element {
+      static get is() { return 'my-bar'; }
+      static get properties(){
+        return{
+          sectionSelected:{
+            type:String,
+            value:"docs"
+          },
+          isDocsSelected:{
+            type:Boolean,
+            computed:'_computeIsDocsSelected(sectionSelected)'
+          },
+          isDemoSelected:{
+            type:Boolean,
+            computed:'_computeIsDemoSelected(sectionSelected)'
+          }
+        }
+      }
+
+      _computeIsDocsSelected(secSel){
+        return (secSel === "docs");
+      }
+
+      _computeIsDemoSelected(secSel){
+        return (secSel === "demo");
+      }
+
+      sectionChanged(ev){
+        this.sectionSelected = ev.currentTarget.id;
+      }
+    }
+
+    window.customElements.define(MyBar.is, MyBar);
+  </script>
+</dom-module>
