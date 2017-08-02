@@ -10,10 +10,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-pie">
   <template>
+    <style include="iron-flex"></style>
+    <style include="iron-flex-factors"></style>
+    <style include="iron-flex-alignment"></style>
     <style include="shared-styles">
       :host {
         display: block;
@@ -21,71 +25,221 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding: 10px;
       }
 
-      .icons-action{
-        text-align: right;
-      }
 
-      .selection-wrapper{
-        cursor: pointer;
-      }
-
-      .docs-true,.demo-true{
-        color:green;
-      }
-
-      .full-width{
-        width:100%;
-      }
-
-      td{
-        text-align: center;
-      }
     </style>
 
     <div class="card">
-      <h3>Awesome Pie Chart</h3>
-      <div class="icons-action">
-        <span id="docs" on-click="sectionChanged" class$="selection-wrapper docs-[[isDocsSelected]]"><iron-icon icon="assignment"></iron-icon> Docs</span>&nbsp;&nbsp;
-        <span id="demo" on-click="sectionChanged" class$="selection-wrapper demo-[[isDemoSelected]]"><iron-icon icon="visibility"></iron-icon> Demo</span>
+      <div class="flex layout horizontal">
+        <div class="flex-8">
+          <h3>awesome-pie-chart</h3>
+        </div>
+        <div class="flex-4 layout horizontal end-justified">
+          <span id="docs" on-click="sectionChanged" class$="selection-wrapper docs-[[isDocsSelected]]"><iron-icon icon="assignment"></iron-icon> Docs</span>&nbsp;&nbsp;
+          <span id="demo" on-click="sectionChanged" class$="selection-wrapper demo-[[isDemoSelected]]"><iron-icon icon="visibility"></iron-icon> Demo</span>
+        </div>
       </div>
 
       <template is="dom-if" if={{isDocsSelected}}>
-        <h4>Properties</h4>
-        <table class="full-width">
-          <tr>
-            <th>name</th>
-            <th>type</th>
-            <th>attributes</th>
-            <th>default</th>
-            <th>mandatory</th>
-          </tr>
-          <tr>
-            <th>data</th>
-            <td><i>Array</i></td>
-            <td>User defined array of object</td>
-            <td>N/A</td>
-            <td>yes</td>
-          </tr>
-          <tr>
-            <th>chart-config</th>
-            <td><i>Object</i></td>
-            <td>
-              <div><code>label</code> : Property <i>name</i> for which chart is to be drawn<div>
-              <div><code>prop</code> : Property <i>value</i> for which chart is to be drawn<div>
-            </td>
-            <td>
-              <div>N/A</div>
-              <div>N/A</div>
-            </td>
-            <td>
-              <div>yes</div>
-              <div>yes</div>
-            </td>
-          </tr>
-        </table>
+        <div class="card card-custom">
+          <h4>Properties</h4>
+          <div class="item-doc">
+            <div class="flex layout horizontal">
+              <div class="flex-4 layout title-head">data</div>
+              <div class="flex-2 layout title-italic">Array</div>
+              <div class="flex-3 layout">default: [ ]</div>
+              <div class="flex-3 layout">mandatory: <b>yes</b></div>
+            </div>
+            <p>
+              A user defined input array which will be used to draw chart. It expected as array of object where the properties of the object will be used as chart entities.
+            </p>
+          </div>
+          <div class="item-doc">
+            <div class="flex layout horizontal">
+              <div class="flex-4 layout title-head">chart-config</div>
+              <div class="flex-2 layout title-italic">Object</div>
+              <div class="flex-3 layout">default: {default settings}</div>
+              <div class="flex-3 layout">mandatory: <b>N/A</b></div>
+            </div>
+            <p>
+              Object used to control behavior of chart, It has many options not all of them are mandatory but however one can use it to enhance the chart. If in any case the provided value does not match required type then default settings are used.
+            </p>
+            <div class="flex layout horizontal">
+              <div class="flex-3 layout title">attribute</div>
+              <div class="flex-6 layout title">description</div>
+              <div class="flex-2 layout title horizontal center-justified">default</div>
+              <div class="flex-1 layout title horizontal center-justified">mandatory</div>
+            </div>
+            <hr/>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title">label <i>(string)</i></div>
+              <div class="flex-6 layout">label or context text name on which pie chart is to be drawn must be from input object array</div>
+              <div class="flex-2 layout horizontal center-justified">""</div>
+              <div class="flex-1 layout horizontal center-justified">yes</div>
+            </div>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title">prop <i>(string)</i></div>
+              <div class="flex-6 layout">property value to be considered for pie calculation</div>
+              <div class="flex-2 layout horizontal center-justified">""</div>
+              <div class="flex-1 layout horizontal center-justified">yes</div>
+            </div>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title">radiusSize <i>(number/decimal)</i></div>
+              <div class="flex-6 layout">The size of the radius of the pie max to be 1, useful in adjusting the chart in case of huge labels</div>
+              <div class="flex-2 layout horizontal center-justified">0.8</div>
+              <div class="flex-1 layout horizontal center-justified">no</div>
+            </div>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title">labelsInside <i>(Boolean)</i></div>
+              <div class="flex-6 layout">In case of true labels are draw inside the circle of pie/donught good for small chart</div>
+              <div class="flex-2 layout horizontal center-justified">false</div>
+              <div class="flex-1 layout horizontal center-justified">no</div>
+            </div>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title">color <i>(Array)</i></div>
+              <div class="flex-6 layout">Array of color string size to be equal or greater than size of input data array</div>
+              <div class="flex-2 layout horizontal center-justified">[ ]</div>
+              <div class="flex-1 layout horizontal center-justified">no</div>
+            </div>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title">disableHoverAnimation <i>(Boolean)</i></div>
+              <div class="flex-6 layout">on pie hover control animation enable/disable</div>
+              <div class="flex-2 layout horizontal center-justified">false</div>
+              <div class="flex-1 layout horizontal center-justified">no</div>
+            </div>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title">hoverAnimationDuration <i>(Number)</i></div>
+              <div class="flex-6 layout">duration of animation on pie hover in milliseconds</div>
+              <div class="flex-2 layout horizontal center-justified">1000</div>
+              <div class="flex-1 layout horizontal center-justified">no</div>
+            </div>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title">hoverRadius <i>(Number/Decimal)</i></div>
+              <div class="flex-6 layout">The point at which the chart should animate on hover if greater than 'outerRadius' chart animates outside if less animates inside</div>
+              <div class="flex-2 layout horizontal center-justified">0.8</div>
+              <div class="flex-1 layout horizontal center-justified">no</div>
+            </div>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title">outerRadius <i>(Number/Decimal)</i></div>
+              <div class="flex-6 layout">outer radius of the pie should be less than 'radiusSize'</div>
+              <div class="flex-2 layout horizontal center-justified">0.7</div>
+              <div class="flex-1 layout horizontal center-justified">no</div>
+            </div>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title">innerRadius <i>(Number/Decimal)</i></div>
+              <div class="flex-6 layout">inner radius of the pie if 0 behaves as a full pie chart else gives a feel of donught</div>
+              <div class="flex-2 layout horizontal center-justified">0.4</div>
+              <div class="flex-1 layout horizontal center-justified">no</div>
+            </div>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title">cornerRadius <i>(Number/Decimal)</i></div>
+              <div class="flex-6 layout">corner radius of each pie</div>
+              <div class="flex-2 layout horizontal center-justified">3</div>
+              <div class="flex-1 layout horizontal center-justified">no</div>
+            </div>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title">padding <i>(Number/Decimal)</i></div>
+              <div class="flex-6 layout">padding between each slice in chart</div>
+              <div class="flex-2 layout horizontal center-justified">0.015</div>
+              <div class="flex-1 layout horizontal center-justified">no</div>
+            </div>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title">spanningLine <i>(Number/Decimal)</i></div>
+              <div class="flex-6 layout">The position of the polyline to be drawn for labels should be greater than 'outerRadius'</div>
+              <div class="flex-2 layout horizontal center-justified">0.8</div>
+              <div class="flex-1 layout horizontal center-justified">no</div>
+            </div>
+            <div class="flex layout horizontal">
+              <div class="flex-3 layout title">textPositionRadius <i>(Number/Decimal)</i></div>
+              <div class="flex-6 layout">The position of the labels outside chart make sense to be equal to outer radius always but can experiment</div>
+              <div class="flex-2 layout horizontal center-justified">0.7</div>
+              <div class="flex-1 layout horizontal center-justified">no</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-custom">
+          <h4>Methods</h4>
+          <div class="item-doc">
+            <div class="flex layout horizontal">
+              <div class="flex-3 layout title-head">pie-click</div>
+              <div class="flex-3 layout title-italic">Function to be called when a pie slice is clicked</div>
+              <div class="flex-6 layout">returns param as (<u>param1</u>:{data of the pie clicked},<u>param2</u>:{percentage value of pie clicked}:<u>param3</u>:{svg object clicked})</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-custom">
+          <h4>Events/Hooks</h4>
+          <div class="item-doc">
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title-head">span-labels</div>
+              <div class="flex-3 layout title-italic">Hook so that user can define his own text in the text labels</div>
+              <div class="flex-6 layout">return type shall be string and passing param include (<u>param1</u>:{data of the pie in context},<u>param2</u>:{percentage value of pie in context}:<u>param3</u>:{svg object in context})</div>
+            </div>
+            <div class="flex layout horizontal">
+              <div class="flex-3 layout title-head">hover-labels</div>
+              <div class="flex-3 layout title-italic">Hook so that user can define his own text in the hover tooltip</div>
+              <div class="flex-6 layout">return type shall be string and passing param include (<u>param1</u>:{data of the pie in context},<u>param2</u>:{percentage value of pie in context}:<u>param3</u>:{svg object in context})</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-custom">
+          <h4>Mixins supported</h4>
+          <div class="item-doc">
+            <div class="flex layout horizontal">
+              <div class="flex-3 layout title">name</div>
+              <div class="flex-6 layout title">description</div>
+              <div class="flex-3 layout title horizontal center-justified">default</div>
+            </div>
+            <hr/>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title-italic">--polyline-opacity</div>
+              <div class="flex-6 layout">To set opacity of the line directing to labels</div>
+              <div class="flex-3 layout horizontal center-justified">0.5</div>
+            </div>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title-italic">--polyline-stroke-color</div>
+              <div class="flex-6 layout">To set stroke color of line</div>
+              <div class="flex-3 layout horizontal center-justified">#666666</div>
+            </div>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title-italic">--polyline-stroke-width</div>
+              <div class="flex-6 layout">To set stroke width of line</div>
+              <div class="flex-3 layout horizontal center-justified">2px</div>
+            </div>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title-italic">--polyline-fill</div>
+              <div class="flex-6 layout">o set fill color for line</div>
+              <div class="flex-3 layout horizontal center-justified">none</div>
+            </div>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title-italic">--label-text-size</div>
+              <div class="flex-6 layout">To set label font size</div>
+              <div class="flex-3 layout horizontal center-justified">12px</div>
+            </div>
+            <div class="flex layout horizontal items-in">
+              <div class="flex-3 layout title-italic">--label-stroke-color</div>
+              <div class="flex-6 layout">To set label color</div>
+              <div class="flex-3 layout horizontal center-justified">#999999</div>
+            </div>
+            <div class="flex layout horizontal">
+              <div class="flex-3 layout title-italic">--label-stroke-width</div>
+              <div class="flex-6 layout">To set label stroke width</div>
+              <div class="flex-3 layout horizontal center-justified">0.5</div>
+            </div>
+          </div>
+        </div>
+
+
       </template>
       <template is="dom-if" if={{isDemoSelected}}>
-        
+        <iframe style="border: 1px solid #999;width: 100%; height: 500px"
+                src="https://embed.plnkr.co/xpEJVB7KxXsAMPX904EX/?show=preview" frameborder="0"
+                allowfullscreen="allowfullscreen">
+          Loading plunk...
+        </iframe>
+
       </template>
     </div>
   </template>
