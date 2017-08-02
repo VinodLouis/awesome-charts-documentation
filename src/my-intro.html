@@ -12,30 +12,58 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="../bower_components/awesome-charts/awesome-pie-chart.html">
 
-<dom-module id="my-view1">
+<dom-module id="my-intro">
   <template>
     <style include="shared-styles">
       :host {
         display: block;
-
         padding: 10px;
+      }
+
+      .wrapper-logo{
+        width:310px;
+        margin:auto;
       }
     </style>
 
     <div class="card">
-      <div class="circle">1</div>
-      <h1>View One</h1>
-      <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
-      <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
+      <div class="wrapper-logo"><img src="./images/logo.png" /></div>
 
-      <awesome-pie-chart chart-config="{{pieConfig}}" data="{{pieData}}" pie-click="{{clickPie}}" span-labels="{{labelCall}}"></awesome-pie-chart>
+      <p>Glad that you made here! Welcome to Awesome charts. This is an library intented for polymer 2.0 users for d3 charts, the charts ar purely made in d3.js v4. It provides customization to the user exposing various properties, methods and events.  
+      </p>
+
+      <h3>Set up</h3>
+      <div>Currently you should be able to install it via bower (soon will be available on yarn & webpack too).</div>
+      <code>`bower install awesome-charts --save`</code>
+      <p>This will download the latest version of library and its dependencies and place it under bower_components</p>
+
+      <h3>Directory structure</h3>
+      <pre>
+        awesome-charts
+        |---demo
+        |
+        |---all-imports.html
+        |
+        |---awesome-pie-chart.html
+        |
+        |---awesome-line-chart.html
+        .
+        .....
+        .
+        .......
+      </pre>
+      <p>under <code>/demo</code> folder you can see an short demo of how the component works.</p>
+
+      <p>Currenlty its in development mode. I'll soon addd more feature like animation additional customization with more new type of charts. You are welcome to contribute to the repo</p>
     </div>
+
+
 
   </template>
 
   <script>
-    class MyView1 extends Polymer.Element {
-      static get is() { return 'my-view1'; }
+    class MyIntro extends Polymer.Element {
+      static get is() { return 'my-intro'; }
       static get properties() {
         return{
           pieConfig:{
@@ -62,6 +90,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
     }
 
-    window.customElements.define(MyView1.is, MyView1);
+    window.customElements.define(MyIntro.is, MyIntro);
   </script>
 </dom-module>

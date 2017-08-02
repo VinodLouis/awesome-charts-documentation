@@ -1,0 +1,128 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-pie">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+
+      .icons-action{
+        text-align: right;
+      }
+
+      .selection-wrapper{
+        cursor: pointer;
+      }
+
+      .docs-true,.demo-true{
+        color:green;
+      }
+
+      .full-width{
+        width:100%;
+      }
+
+      td{
+        text-align: center;
+      }
+    </style>
+
+    <div class="card">
+      <h3>Awesome Pie Chart</h3>
+      <div class="icons-action">
+        <span id="docs" on-click="sectionChanged" class$="selection-wrapper docs-[[isDocsSelected]]"><iron-icon icon="assignment"></iron-icon> Docs</span>&nbsp;&nbsp;
+        <span id="demo" on-click="sectionChanged" class$="selection-wrapper demo-[[isDemoSelected]]"><iron-icon icon="visibility"></iron-icon> Demo</span>
+      </div>
+
+      <template is="dom-if" if={{isDocsSelected}}>
+        <h4>Properties</h4>
+        <table class="full-width">
+          <tr>
+            <th>name</th>
+            <th>type</th>
+            <th>attributes</th>
+            <th>default</th>
+            <th>mandatory</th>
+          </tr>
+          <tr>
+            <th>data</th>
+            <td><i>Array</i></td>
+            <td>User defined array of object</td>
+            <td>N/A</td>
+            <td>yes</td>
+          </tr>
+          <tr>
+            <th>chart-config</th>
+            <td><i>Object</i></td>
+            <td>
+              <div><code>label</code> : Property <i>name</i> for which chart is to be drawn<div>
+              <div><code>prop</code> : Property <i>value</i> for which chart is to be drawn<div>
+            </td>
+            <td>
+              <div>N/A</div>
+              <div>N/A</div>
+            </td>
+            <td>
+              <div>yes</div>
+              <div>yes</div>
+            </td>
+          </tr>
+        </table>
+      </template>
+      <template is="dom-if" if={{isDemoSelected}}>
+        
+      </template>
+    </div>
+  </template>
+
+  <script>
+    class MyPie extends Polymer.Element {
+      static get is() { return 'my-pie'; }
+      static get properties(){
+        return{
+          sectionSelected:{
+            type:String,
+            value:"docs"
+          },
+          isDocsSelected:{
+            type:Boolean,
+            computed:'_computeIsDocsSelected(sectionSelected)'
+          },
+          isDemoSelected:{
+            type:Boolean,
+            computed:'_computeIsDemoSelected(sectionSelected)'
+          }
+        }
+      }
+
+      _computeIsDocsSelected(secSel){
+        return (secSel === "docs");
+      }
+
+      _computeIsDemoSelected(secSel){
+        return (secSel === "demo");
+      }
+
+      sectionChanged(ev){
+        this.sectionSelected = ev.currentTarget.id;
+      }
+    }
+
+    window.customElements.define(MyPie.is, MyPie);
+  </script>
+</dom-module>
