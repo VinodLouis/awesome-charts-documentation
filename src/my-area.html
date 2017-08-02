@@ -1,0 +1,240 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-area">
+    <template>
+        <style include="iron-flex"></style>
+        <style include="iron-flex-factors"></style>
+        <style include="iron-flex-alignment"></style>
+        <style include="shared-styles">
+            :host {
+            display: block;
+
+            padding: 10px;
+            }
+
+
+
+
+        </style>
+
+        <div class="card">
+            <div class="flex layout horizontal">
+                <div class="flex-8">
+                    <h3>awesome-area-chart</h3>
+                </div>
+                <div class="flex-4 layout horizontal end-justified">
+                    <span id="docs" on-click="sectionChanged" class$="selection-wrapper docs-[[isDocsSelected]]"><iron-icon icon="assignment"></iron-icon> Docs</span>&nbsp;&nbsp;
+                    <span id="demo" on-click="sectionChanged" class$="selection-wrapper demo-[[isDemoSelected]]"><iron-icon icon="visibility"></iron-icon> Demo</span>
+                </div>
+            </div>
+
+            <template is="dom-if" if={{isDocsSelected}}>
+                <div class="card card-custom">
+                    <h4>Properties</h4>
+                    <div class="item-doc">
+                        <div class="flex layout horizontal">
+                            <div class="flex-4 layout title-head">data</div>
+                            <div class="flex-2 layout title-italic">Array</div>
+                            <div class="flex-3 layout">default: [ ]</div>
+                            <div class="flex-3 layout">mandatory: <b>yes</b></div>
+                        </div>
+                        <p>
+                            A user defined input array which will be used to draw chart. It expected as array of object where the properties of the object will be used as chart entities.
+                        </p>
+                    </div>
+
+                    <div class="item-doc">
+                        <div class="flex layout horizontal">
+                            <div class="flex-4 layout title-head">chart-config</div>
+                            <div class="flex-2 layout title-italic">Object</div>
+                            <div class="flex-3 layout">default: {default settings}</div>
+                            <div class="flex-3 layout">mandatory: <b>N/A</b></div>
+                        </div>
+                        <p>
+                            Object used to control behavior of chart, It has many options not all of them are mandatory but however one can use it to enhance the chart. If in any case the provided value does not match required type then default settings are used.
+                        </p>
+                        <div class="flex layout horizontal">
+                            <div class="flex-3 layout title">attribute</div>
+                            <div class="flex-6 layout title">description</div>
+                            <div class="flex-2 layout title horizontal center-justified">default</div>
+                            <div class="flex-1 layout title horizontal center-justified">mandatory</div>
+                        </div>
+                        <hr/>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">label <i>(String)</i></div>
+                            <div class="flex-6 layout">The date object or date string property name which can be used to plot graph</div>
+                            <div class="flex-2 layout horizontal center-justified">" "</div>
+                            <div class="flex-1 layout horizontal center-justified">yes</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">keys <i>(String/Array)</i></div>
+                            <div class="flex-6 layout">The values or properties to which graph shall be plot can be a string in case of single area chart or array in case of multi area chart</div>
+                            <div class="flex-2 layout horizontal center-justified">" "</div>
+                            <div class="flex-1 layout horizontal center-justified">yes</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">color <i>(Array)</i></div>
+                            <div class="flex-6 layout">Array of colors to be used in chart, lenght should be greater than equal to key(s)</div>
+                            <div class="flex-2 layout horizontal center-justified">[ ]</div>
+                            <div class="flex-1 layout horizontal center-justified">no</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">margin <i>(Object)</i></div>
+                            <div class="flex-6 layout">Object of properties left,right,top,bottom : All strictly a number value, to set margins useful in case of handling long labels</div>
+                            <div class="flex-2 layout horizontal center-justified">{left:35, right:80, top: 30, bottom: 50}</div>
+                            <div class="flex-1 layout horizontal center-justified">no</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">aggregatedTooltip <i>(Boolean)</i></div>
+                            <div class="flex-6 layout">Shows tooltip on top based on value just applicable for single area chart</div>
+                            <div class="flex-2 layout horizontal center-justified">true</div>
+                            <div class="flex-1 layout horizontal center-justified">no</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">legends <i>(String/Array)</i></div>
+                            <div class="flex-6 layout">It accepts values in similar fashion as keys legends are given preference over keys in labelling</div>
+                            <div class="flex-2 layout horizontal center-justified">" "</div>
+                            <div class="flex-1 layout horizontal center-justified">no</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">drawCircle <i>(Boolean)</i></div>
+                            <div class="flex-6 layout">Draws a circle at every end point on line when set to true</div>
+                            <div class="flex-2 layout horizontal center-justified">false</div>
+                            <div class="flex-1 layout horizontal center-justified">no</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">timeFormat <i>(String)</i></div>
+                            <div class="flex-6 layout">The x axis format identifier must be an valid d3.js time parse specifier(<a href="https://github.com/d3/d3-time-format" target="_blank">github.com/d3/d3-time-format</a>)</div>
+                            <div class="flex-2 layout horizontal center-justified">"%d-%b-%y"</div>
+                            <div class="flex-1 layout horizontal center-justified">no</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">valueFormat <i>(String)</i></div>
+                            <div class="flex-6 layout">The y axis format identifier must be an valid d3.js number oarse specifier(<a href="https://github.com/d3/d3-format" target="_blank">github.com/d3/d3-format</a> )</div>
+                            <div class="flex-2 layout horizontal center-justified">".2s"</div>
+                            <div class="flex-1 layout horizontal center-justified">no</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">xlabelRotate <i>(Number)</i></div>
+                            <div class="flex-6 layout">The rotation value in degree for x axis alignment</div>
+                            <div class="flex-2 layout horizontal center-justified">45</div>
+                            <div class="flex-1 layout horizontal center-justified">no</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title">gridLines <i>(Boolean)</i></div>
+                            <div class="flex-6 layout">draws background gridlines if set to true</div>
+                            <div class="flex-2 layout horizontal center-justified">true</div>
+                            <div class="flex-1 layout horizontal center-justified">no</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-custom">
+                    <h4>Methods</h4>
+                    <div class="item-doc">
+                        <div class="flex layout horizontal">
+                            <div class="flex-3 layout title-head">circle-click</div>
+                            <div class="flex-3 layout title-italic">Function to be called when a circle is clicked</div>
+                            <div class="flex-6 layout">returns param as (<u>param1</u>:{data for the clicked circle},<u>param2</u>:{property under context click}:<u>param3</u>:{the circle svg object clicked})</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-custom">
+                    <h4>Events/Hooks</h4>
+                    <div class="item-doc">
+                        <div class="flex layout horizontal">
+                            <div class="flex-3 layout title-head">tooltip</div>
+                            <div class="flex-3 layout title-italic">Hook for displaying tooltip</div>
+                            <div class="flex-6 layout">return type shall be string and passing param include (<u>param1</u>:{data for the context point},<u>param2</u>:{property name under context})</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-custom">
+                    <h4>Mixins supported</h4>
+                    <div class="item-doc">
+                        <div class="flex layout horizontal">
+                            <div class="flex-3 layout title">name</div>
+                            <div class="flex-6 layout title">description</div>
+                            <div class="flex-3 layout title horizontal center-justified">default</div>
+                        </div>
+                        <hr/>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title-italic">--grid-stroke-color</div>
+                            <div class="flex-6 layout">Set grid line color</div>
+                            <div class="flex-3 layout horizontal center-justified">#ddd</div>
+                        </div>
+                        <div class="flex layout horizontal items-in">
+                            <div class="flex-3 layout title-italic">--grid-stroke-width</div>
+                            <div class="flex-6 layout">Set width of the grid lines</div>
+                            <div class="flex-3 layout horizontal center-justified">1px</div>
+                        </div>
+                        <div class="flex layout horizontal">
+                            <div class="flex-3 layout title-italic">--chart-opacity</div>
+                            <div class="flex-6 layout">Set opacity for all area</div>
+                            <div class="flex-3 layout horizontal center-justified">0.5</div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <template is="dom-if" if={{isDemoSelected}}>
+                <iframe style="border: 1px solid #999;width: 100%; height: 500px"
+                        src="https://embed.plnkr.co/G4S8cuwXNnk69YvEuHkb/?show=preview" frameborder="0"
+                        allowfullscreen="allowfullscreen">
+                    Loading plunk...
+                </iframe>
+            </template>
+        </div>
+    </template>
+
+    <script>
+    class MyArea extends Polymer.Element {
+      static get is() { return 'my-area'; }
+      static get properties(){
+        return{
+          sectionSelected:{
+            type:String,
+            value:"docs"
+          },
+          isDocsSelected:{
+            type:Boolean,
+            computed:'_computeIsDocsSelected(sectionSelected)'
+          },
+          isDemoSelected:{
+            type:Boolean,
+            computed:'_computeIsDemoSelected(sectionSelected)'
+          }
+        }
+      }
+
+      _computeIsDocsSelected(secSel){
+        return (secSel === "docs");
+      }
+
+      _computeIsDemoSelected(secSel){
+        return (secSel === "demo");
+      }
+
+      sectionChanged(ev){
+        this.sectionSelected = ev.currentTarget.id;
+      }
+    }
+
+    window.customElements.define(MyArea.is, MyArea);
+  </script>
+</dom-module>
