@@ -79,7 +79,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
     
-    <app-location route="{{route}}"></app-location>
+    <app-location route="{{route}}" use-hash-as-path></app-location>
     <app-route
         route="{{route}}"
         pattern="[[rootPattern]]:page"
@@ -90,15 +90,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer">
         <app-toolbar>
-        <a name="intro" href="intro"><img src="./images/logo.png" class="logo"></a></app-toolbar>
+        <a name="intro" href="#/intro"><img src="./images/logo.png" class="logo"></a></app-toolbar>
         <br/>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="intro" href="intro">Set up & Introduction</a>
-          <a name="pie" href="pie">pie chart</a>
-          <a name="area" href="area">area chart</a>
-          <a name="line" href="line">line chart</a>
-          <a name="bar" href="bar">bar chart</a>
-          <a name="sbar" href="sbar">stacked bar chart</a>
+          <a name="intro" href="#/intro">Set up & Introduction</a>
+          <a name="pie" href="#/pie">Pie chart</a>
+          <a name="area" href="#/area">Area chart</a>
+          <a name="line" href="#/line">Line chart</a>
+          <a name="bar" href="#/bar">Bar chart</a>
+          <a name="sbar" href="#/sbar">Stacked bar chart</a>
         </iron-selector>
       </app-drawer>
       <!-- Main content -->
@@ -123,10 +123,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <my-line name="line"></my-line>
           <my-area name="area"></my-area>
           <my-bar name="bar"></my-bar>
-          <my-sbar name="sbar"></my-sb>
+          <my-sbar name="sbar"></my-sbar>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
-        <p style="text-align: right;">&copy; (2017) <a href="http:\\www.vinodlouis.com"><span style="color:red">&#10084;</span> VinodLouis</a></p>
+        <div style="text-align: right;margin:0px 35px 10px 35px;">&copy; (2017) <a style="text-decoration:none" href="http:\\www.vinodlouis.com"><span style="color:red">&#10084;</span> <span style="color:#5a5d61">Vinod</span><span style="color:#17bed2">Louis</span></a></div>
       </app-header-layout>
     </app-drawer-layout>
   </template>
@@ -166,9 +166,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _routePageChanged(page) {
         // Polymer 2.0 will call with `undefined` on initialization.
         // Ignore until we are properly called with a string.
-        if (page === undefined) {
+        /*if (page === undefined) {
           return;
-        }
+        }*/
 
         // If no page was found in the route data, page will be an empty string.
         // Deault to 'view1' in that case.
