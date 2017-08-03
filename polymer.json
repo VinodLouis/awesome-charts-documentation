@@ -2,9 +2,12 @@
   "entrypoint": "index.html",
   "shell": "src/my-app.html",
   "fragments": [
-    "src/my-view1.html",
-    "src/my-view2.html",
-    "src/my-view3.html",
+    "src/my-intro.html",
+    "src/my-pie.html",
+    "src/my-bar.html",
+    "src/my-line.html",
+    "src/my-sbar.html",
+    "src/my-area.html",
     "src/my-view404.html"
   ],
   "sources": [
@@ -18,5 +21,11 @@
   ],
   "lint": {
     "rules": ["polymer-2"]
-  }
+  },
+  "builds": [{
+    "bundle": true,
+    "js": {"compile": true, "minify": true},
+    "css": {"minify": true},
+    "html": {"minify": true}
+  }]
 }
