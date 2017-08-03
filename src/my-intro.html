@@ -10,7 +10,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="shared-styles.html">
-<link rel="import" href="../bower_components/awesome-charts/awesome-pie-chart.html">
 
 <dom-module id="my-intro">
   <template>
@@ -24,20 +23,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         width:310px;
         margin:auto;
       }
+
+      code.hg{
+      padding: 5px 10px;
+      background-color: #f2f2ef;
+      }
     </style>
 
     <div class="card">
       <div class="wrapper-logo"><img src="./images/logo.png" /></div>
 
-      <p>Glad that you made here! Welcome to Awesome charts. This is an library intented for polymer 2.0 users for d3 charts, the charts ar purely made in d3.js v4. It provides customization to the user exposing various properties, methods and events.  
+      <p>Glad that you made here. Welcome to Awesome charts, a library intended for polymer 2.0 composed of d3 charts, the charts are purely written in d3.js v4. It provides customization to the user exposing various properties, methods and events.
+      </p>
+
+      <p>
+        I was involved in polymer projects recently in my work where this idea of creating charts clicked to me, the idea behind this library is to expose customization so the user can use it without or little knowledge of the underlying things. The module will always be growing and will ensure there will never be breaking changes going further. You can either try whole library together or just use the charts as a custom component in projects.
       </p>
 
       <h3>Set up</h3>
-      <div>Currently you should be able to install it via bower & npm (soon will be available on yarn & webpack too).</div>
-      <code>`bower install awesome-charts --save`</code>
+      <p>Currently you should be able to install it via bower & npm (soon will be available on yarn & webpack too).</p>
+      <code class="hg"> $ bower install awesome-charts --save</code>
       <p>or</p>
-      <code>`npm install awesome-charts --save`</code>
+      <code class="hg"> $ npm install awesome-charts --save</code>
       <p>This will download the latest version of library and its dependencies.</p>
+
+      <div> GitHub Page : <a href="https://github.com/VinodLouis/awesome-charts" target="_blank">github.com/VinodLouis/awesome-charts</a></div>
+      <div> NPM Page : <a href="https://www.npmjs.com/package/awesome-charts" target="_blank">npmjs.com/package/awesome-charts</a></div>
 
       <h3>Directory structure</h3>
       <pre>
@@ -54,10 +65,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         .
         .......
       </pre>
-      <p>under <code>/demo</code> folder you can see an short demo of how the component works.</p>
+      <p>under <code>/demo</code> folder you can see a brief demo of how the component works.</p>
 
-      <p>From the left menu you can navigate to respective chart documenation. The page will contain detailed documentation and also without more confusing you guys. The Demo is an direct embedded plunkr. Hence you can try out the change and see for yourself. :)</p>
-      <p>Currenlty its in development mode. I'll soon addd more feature like animation additional customization with more new type of charts. You are welcome to contribute to the repo</p>
+      <p>From the left menu on this page navigate to respective chart links. The page will contain detailed documentation of properties,methods and events. The Demo here is not abstract or hidden , its a tangible interactive embedded plunkr so that you can make changes and evaluate without downloading the package &#9786;. The READ.me file inside each plunkr will give you the context of the data used in charts.</p>
+      <p>Currently its in development mode. I'll soon be adding more feature like animation,redraw and additional customization with more new type of charts &#9971;. You are welcome to contribute to the repo for more details regarding contribution check for guidelines on GitHub READ.me</p>
     </div>
 
 
@@ -67,30 +78,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
     class MyIntro extends Polymer.Element {
       static get is() { return 'my-intro'; }
-      static get properties() {
-        return{
-          pieConfig:{
-            type:Object,
-            value:{
-               prop:"count",
-               labelsInside:false,
-               label:"id"
-               //disableHoverAnimation:true
-            }
-          },
-          pieData:{
-            type:Array,
-            value:[{id:"Credit",count:4586},{id:"Debit",count:5896},{id:"Credit1",count:4589},{id:"Debit1",count:3006}]
-          } 
-        }
-      }
-      clickPie(a,b,c){
-        console.log(a,b,c);
-      }
-
-      labelCall(data,d,el){
-              return data.id + ': <tspan> $ ' + data.count.toLocaleString('en') + '</tspan>'
-            }
     }
 
     window.customElements.define(MyIntro.is, MyIntro);
