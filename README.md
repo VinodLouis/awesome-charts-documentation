@@ -2,7 +2,7 @@
 
 # Awesome charts documentation
 
-This is a project used for documentation and demo for the library [awesome-charts](https://github.com/VinodLouis/awesome-charts). To see the documentation in action go to [coming soon]() 
+This is a project used for documentation and demo for the library [awesome-charts](https://github.com/VinodLouis/awesome-charts). To see the documentation in action go to [awesome-charts-documentation](http://www.vinodlouis.com/demos/awesome-charts-documentation/) 
 
 ### Installation & Running in development
 
